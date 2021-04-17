@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
-import AppBar from "./components/AppBar";
+import AppBar from "./components/AppBar/AppBar";
 import ContactsView from "./views/ContactsView";
 import HomeView from "./views/HomeView";
 import RegisterView from "./views/RegisterView";

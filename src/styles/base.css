@@ -8,3 +8,23 @@
   background-repeat: no-repeat;
   background-position: 50% 50%;
 }
+
+button {
+  width: 110px;
+  padding: 6px;
+
+  font-weight: 400;
+
+  border: 1px solid #acabab;
+  border-radius: 3px;
+
+  background-color: transparent;
+}
+
+button:hover,
+button:focus {
+  color: #ffffff;
+  background-color: #2638da;
+
+  outline: none;
+}

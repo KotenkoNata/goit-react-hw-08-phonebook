@@ -1,21 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { authOperations } from "../redux/auth";
+import { authOperations } from "../../redux/auth";
 
-const styles = {
-  form: {
-    width: 320,
-  },
-  label: {
-    display: "flex",
-    flexDirection: "column",
-    marginBottom: 15,
-  },
-};
+import styles from "./Login.module.css";
 
-class RegisterView extends Component {
+class LoginView extends Component {
   state = {
-    name: "",
     email: "",
     password: "",
   };
@@ -27,34 +17,24 @@ class RegisterView extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
 
-    this.props.onRegister(this.state);
+    this.props.onLogin(this.state);
 
     this.setState({ name: "", email: "", password: "" });
   };
 
   render() {
-    const { name, email, password } = this.state;
+    const { email, password } = this.state;
 
     return (
       <div>
-        <h1>Sign up page</h1>
+        <h1>Log in page</h1>
 
         <form
           onSubmit={this.handleSubmit}
-          style={styles.form}
+          className={styles.form}
           autoComplete="off"
         >
-          <label style={styles.label}>
-            Name
-            <input
-              type="text"
-              name="name"
-              value={name}
-              onChange={this.handleChange}
-            />
-          </label>
-
-          <label style={styles.label}>
+          <label className={styles.label}>
             Email
             <input
               type="email"
@@ -64,7 +44,7 @@ class RegisterView extends Component {
             />
           </label>
 
-          <label style={styles.label}>
+          <label className={styles.label}>
             Password
             <input
               type="password"
@@ -74,7 +54,7 @@ class RegisterView extends Component {
             />
           </label>
 
-          <button type="submit">Sign up</button>
+          <button type="submit">Login</button>
         </form>
       </div>
     );
@@ -82,7 +62,7 @@ class RegisterView extends Component {
 }
 
 const mapDispatchToProps = {
-  onRegister: authOperations.register,
+  onLogin: authOperations.logIn,
 };
 
-export default connect(null, mapDispatchToProps)(RegisterView);
+export default connect(null, mapDispatchToProps)(LoginView);
