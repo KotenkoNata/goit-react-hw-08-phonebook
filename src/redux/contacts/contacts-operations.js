@@ -35,10 +35,10 @@ const deleteContact = (contactId) => async (dispatch) => {
   }
 };
 
-
-
-export default {
+const contactsOperations = {
   addContact,
   deleteContact,
   fetchContacts,
 };
+
+export default contactsOperations;

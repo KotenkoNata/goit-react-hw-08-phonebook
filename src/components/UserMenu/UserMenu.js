@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { authSelectors, authOperations } from "../../redux/auth";
 import defaultAvatar from "./default-avatar.png";
+import PropTypes from "prop-types";
 
 const styles = {
   container: {
@@ -26,6 +27,15 @@ const UserMenu = ({ avatar, name, onLogout }) => (
     </button>
   </div>
 );
+
+UserMenu.defaultProps = {
+  userEmail: null,
+};
+
+UserMenu.propTypes = {
+  userEmail: PropTypes.string,
+  onLogout: PropTypes.func.isRequired,
+};
 
 const mapStateToProps = (state) => ({
   name: authSelectors.getUsername(state),

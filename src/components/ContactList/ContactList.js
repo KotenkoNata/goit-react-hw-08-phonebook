@@ -9,8 +9,7 @@ import PropTypes from "prop-types";
 
 import styles from "./ContactList.module.css";
 
-import Loader from "react-loader-spinner";
-import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import Loading from "../Loader";
 
 class ContactList extends Component {
   static propTypes = {
@@ -31,17 +30,9 @@ class ContactList extends Component {
   render() {
     const { contacts, onDeleteContact, isLoading } = this.props;
 
-    const loaderConfig = {
-      type: "ThreeDots",
-      color: "#303f9f",
-      height: 50,
-      width: 50,
-      className: styles.loader,
-    };
-
     return (
       <>
-        {isLoading && <Loader {...loaderConfig} />}
+        {isLoading && <Loading />}
         <ul className={styles.contactList}>
           {contacts.length ? (
             contacts.map(({ id, name, number }) => (

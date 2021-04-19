@@ -70,4 +70,11 @@ const getCurrentUser = () => async (dispatch, getState) => {
   }
 };
 
-export default { register, logIn, logOut, getCurrentUser };
+const authOperation = {
+  register,
+  logIn,
+  logOut,
+  getCurrentUser,
+};
+
+export default authOperation;

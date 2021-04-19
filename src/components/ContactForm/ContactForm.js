@@ -1,29 +1,29 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 import {
   contactOperations,
   contactsSelectors,
-} from '../../redux/contacts/index';
+} from "../../redux/contacts/index";
 
-import styles from './ContactForm.module.css';
+import styles from "./ContactForm.module.css";
 
 class ContactForm extends Component {
   state = {
-    name: '',
-    number: '',
+    name: "",
+    number: "",
   };
 
   static propTypes = {
     onSubmit: PropTypes.func.isRequired,
   };
 
-  handleChange = e => {
+  handleChange = (e) => {
     const { name, value } = e.currentTarget;
     this.setState({ [name]: value });
   };
 
-  handleSubmit = event => {
+  handleSubmit = (event) => {
     event.preventDefault();
 
     const { name, number } = this.state;
@@ -33,7 +33,7 @@ class ContactForm extends Component {
       return;
     }
 
-    const existingContact = items.find(contact => contact.name === name);
+    const existingContact = items.find((contact) => contact.name === name);
 
     if (existingContact) {
       alert(`${existingContact.name} is already in contacts.`);
@@ -46,7 +46,7 @@ class ContactForm extends Component {
   };
 
   reset = () => {
-    this.setState({ name: '', number: '' });
+    this.setState({ name: "", number: "" });
   };
 
   render() {
@@ -80,11 +80,11 @@ class ContactForm extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   items: contactsSelectors.getAllContacts(state),
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   onSubmit: (name, number) =>
     dispatch(contactOperations.addContact(name, number)),
 });

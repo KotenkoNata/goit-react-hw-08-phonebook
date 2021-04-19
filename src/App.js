@@ -1,13 +1,17 @@
-import React, { Component } from "react";
-import { Switch, Route } from "react-router-dom";
+import React, { Component, Suspense, lazy } from "react";
+import { Switch } from "react-router-dom";
 import AppBar from "./components/AppBar/AppBar";
-import ContactsView from "./views/ContactsView";
-import HomeView from "./views/HomeView";
-import RegisterView from "./views/RegisterView";
-import LoginView from "./views/LoginView";
 import Container from "./components/Container";
 import { authOperations } from "./redux/auth";
 import { connect } from "react-redux";
+import PrivateRoute from "./components/PrivateRoute";
+import PublicRoute from "./components/PublicRoute";
+import Loading from "./components/Loader";
+
+const HomeView = lazy(() => import("./views/HomeView"));
+const LoginView = lazy(() => import("./views/LoginView"));
+const RegisterView = lazy(() => import("./views/RegisterView"));
+const ContactsView = lazy(() => import("./views/ContactsView"));
 
 class App extends Component {
   componentDidMount() {
@@ -18,13 +22,28 @@ class App extends Component {
     return (
       <Container>
         <AppBar />
-
-        <Switch>
-          <Route exact path="/" component={HomeView} />
-          <Route path="/register" component={RegisterView} />
-          <Route path="/login" component={LoginView} />
-          <Route path="/contacts" component={ContactsView} />
-        </Switch>
+        <Suspense fallback={<Loading />}>
+          <Switch>
+            <PublicRoute exact path="/" component={HomeView} />
+            <PublicRoute
+              path="/register"
+              restricted
+              redirectTo={"/contacts"}
+              component={RegisterView}
+            />
+            <PublicRoute
+              path="/login"
+              restricted
+              redirectTo={"/contacts"}
+              component={LoginView}
+            />
+            <PrivateRoute
+              path="/contacts"
+              component={ContactsView}
+              redirectTo="/login"
+            />
+          </Switch>
+        </Suspense>
       </Container>
     );
   }
